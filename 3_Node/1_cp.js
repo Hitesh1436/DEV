@@ -13,7 +13,7 @@
 
 // cp.execSync("code");
 
-console.log("output"+ cp.execSync('node test.js'))
+console.log("output->"+ cp.execSync('node test.js'))
 
 
 
