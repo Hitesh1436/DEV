@@ -5,31 +5,61 @@
 // like text files will go into text File Folder .exe files will go into application folder and so on
 // so at the end you will have a arranged set of files in specific folders
 
+//js mein input Array ke from mein jaata hai and that is array is process.argv Array
 
-// js mein input array ke form mn jata hai i.e that array is process.argv.
+const fs = require("fs");
 
-let inputArr = process.argv.slice(2);        // argv means argument vector
+const path = require("path");
 
-let command=inputArr[0];   // yeh hume jo slice lakr dega array usme se 0 index ko lakr dega command mn
+let inputArr = process.argv.slice(2);
 
-//switch case  dkh rhe hain kse work krta h
-switch(command){
-    case 'tree':
-        console.log('Tree implemented');
-        break;
-        case 'organize':
-        console.log('Organize implemented');
-        break;
-        case 'help':
-        helpfn()
-        break; 
-        default:           //input glt do ya ni dia toh default case chalega 
-            console.log("Please Enter a Valid Command");
-            break;
+//[Node FO.js tree folderpath]
+
+let command = inputArr[0];
+
+switch (command) {
+  case "tree":
+    console.log("Tree Implemented");
+    break;
+  case "organize":
+    organizeFn(inputArr[1]);
+    break;
+  case "help":
+    helpfn();
+    break;
+
+  default:
+    console.log("PLEASE ENTER A VALID Command");
+    break;
 }
-function helpfn(){
-    console.log(`List of all the Commands-
-                     1.)Tree Command- node FO.js tree <dirname>
-                     2.)Organize Command- node FS.js organize <dirname>
-                     3.)Help Command- node FO.js help`)
+
+function helpfn() {
+  console.log(`List of all the Commands-
+                    1) Tree Command - node FO.js tree <dirname>
+                    2) Organize Command- node FO.js organize <dirname>
+                    3) Help Command - node FO.js help`);
+}
+
+function organizeFn(dirpath) {
+  let destPath;
+
+  if (dirpath == undefined) {
+    console.log("Please Enter a valid Directory Path");
+    return;
+  } else {
+    let doesExist = fs.existsSync(dirpath);
+    //console.log(doesExist);
+
+    if (doesExist == true) {
+      destPath = path.join(dirpath, "organized_files");
+
+      if (fs.existsSync(destPath) == false) {
+        fs.mkdirSync(destPath);
+      } else {
+        console.log("This folder Alredy Exists");
+      }
+    } else {
+      console.log("Please Enter a valid Path");
+    }
+  }
 }
