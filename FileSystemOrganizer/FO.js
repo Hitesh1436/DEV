@@ -13,53 +13,107 @@ const path = require("path");
 
 let inputArr = process.argv.slice(2);
 
+let types = {
+    media: ["mp4", "mkv", "mp3"],
+    archives: ["zip", "7z", "rar", "tar", "gz", "ar", "iso", "xz"],
+    documents: [
+        "docx",
+        "doc",
+        "pdf",
+        "xlsx",
+        "xls",
+        "odt",
+        "ods",
+        "odp",
+        "odg",
+        "odf",
+        "txt",
+        "ps",
+        "tex",
+    ],
+    app: ["exe", "dmg", "pkg", "deb"],
+};
+
+
 //[Node FO.js tree folderpath]
 
 let command = inputArr[0];
 
 switch (command) {
-  case "tree":
-    console.log("Tree Implemented");
-    break;
-  case "organize":
-    organizeFn(inputArr[1]);
-    break;
-  case "help":
-    helpfn();
-    break;
+    case "tree":
+        console.log("Tree Implemented");
+        break;
+    case "organize":
+        organizeFn(inputArr[1]);
+        break;
+    case "help":
+        helpfn();
+        break;
 
-  default:
-    console.log("PLEASE ENTER A VALID Command");
-    break;
+    default:
+        console.log("PLEASE ENTER A VALID Command");
+        break;
 }
 
 function helpfn() {
-  console.log(`List of all the Commands-
+    console.log(`List of all the Commands-
                     1) Tree Command - node FO.js tree <dirname>
                     2) Organize Command- node FO.js organize <dirname>
                     3) Help Command - node FO.js help`);
 }
 
 function organizeFn(dirpath) {
-  let destPath;
+    // input of a directory Path
+    let destPath;
 
-  if (dirpath == undefined) {
-    console.log("Please Enter a valid Directory Path");
-    return;
-  } else {
-    let doesExist = fs.existsSync(dirpath);
-    //console.log(doesExist);
-
-    if (doesExist == true) {
-      destPath = path.join(dirpath, "organized_files");
-
-      if (fs.existsSync(destPath) == false) {
-        fs.mkdirSync(destPath);
-      } else {
-        console.log("This folder Alredy Exists");
-      }
+    if (dirpath == undefined) {
+        console.log("Please Enter a valid Directory Path");
+        //check whether dirpath is passed or not
+        return;
     } else {
-      console.log("Please Enter a valid Path");
+        let doesExist = fs.existsSync(dirpath);
+
+        // this will tell whether the dirpath exsists or not
+
+
+        if (doesExist == true) {
+            destPath = path.join(dirpath, "organized_files");
+
+            //   D:\Batches\FJP3 Dev\test Folder\organized_files - I want to create a folder in this path
+
+            if (fs.existsSync(destPath) == false) {
+                fs.mkdirSync(destPath); // we will only create a folder if it does not already exists
+            } else {
+                console.log("This folder Already Exists");
+            }
+        } else {
+            console.log("Please Enter a valid Path");
+        }
     }
-  }
+
+    organizeHelper(dirpath, destPath)
+
+
+}
+
+// we are writing this function to categorize our files
+function organizeHelper(src, dest) {
+    let childNames = fs.readdirSync(src) // get all the files and folders inside your src
+    //console.log(childNames) 
+
+    for (let i = 0; i < childNames.length; i++) {
+        let childAddress = path.join(src, childNames[i])
+        let isFile = fs.lstatSync(childAddress).isFile()
+        //    console.log(childAddress + " " + isFile)
+        if (isFile == true) {
+            let fileCategory = getCategory(childNames[i])
+
+        }
+    }
+
+}
+function getCategory(name) {
+    let ext = path.extname(name)
+    ext = ext.slice(1)
+    console.log(ext)
 }
