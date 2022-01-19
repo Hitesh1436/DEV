@@ -7,9 +7,9 @@
 
 //js mein input Array ke from mein jaata hai and that is array is process.argv Array
 
-const fs = require("fs");
+const fs = require("fs");  // fs module import krwaya  h
 
-const path = require("path");
+const path = require("path"); // path module import krwaya 
 
 let inputArr = process.argv.slice(2);
 
@@ -44,7 +44,7 @@ switch (command) {
         console.log("Tree Implemented");
         break;
     case "organize":
-        organizeFn(inputArr[1]);
+        organizeFn(inputArr[1]);   //inputArr ke 1st index pr path bhjdenge
         break;
     case "help":
         helpfn();
@@ -62,7 +62,10 @@ function helpfn() {
                     3) Help Command - node FO.js help`);
 }
 
-function organizeFn(dirpath) {
+
+function organizeFn(dirpath) {      // folder tk phuch gye but ab edge cases dkhenge 
+    // console.log(dirpath)  
+
     // input of a directory Path
     let destPath;
 
@@ -70,50 +73,98 @@ function organizeFn(dirpath) {
         console.log("Please Enter a valid Directory Path");
         //check whether dirpath is passed or not
         return;
-    } else {
+      } else {
         let doesExist = fs.existsSync(dirpath);
-
-        // this will tell whether the dirpath exsists or not
-
-
+       //  console.log(doesExist)
+    
+        // this will tell whether the dirpath exsists or not (agr hoga toh true dega vrna false dega)
+        
+    
         if (doesExist == true) {
-            destPath = path.join(dirpath, "organized_files");
-
-            //   D:\Batches\FJP3 Dev\test Folder\organized_files - I want to create a folder in this path
-
-            if (fs.existsSync(destPath) == false) {
-                fs.mkdirSync(destPath); // we will only create a folder if it does not already exists
-            } else {
-                console.log("This folder Already Exists");
-            }
+          destPath = path.join(dirpath, "organized_files");
+    
+          //   D:\Batches\FJP3 Dev\test Folder\organized_files - I want to create a folder in this path
+    
+          if (fs.existsSync(destPath) == false) {
+            fs.mkdirSync(destPath); // we will only create a folder if it does not already exists
+          } else {
+            console.log("This folder Already Exists");
+          }
         } else {
-            console.log("Please Enter a valid Path");
+          console.log("Please Enter a valid Path");
         }
+      }
+    
+      organizeHelper(dirpath , destPath)
+    
+    
     }
-
-    organizeHelper(dirpath, destPath)
-
-
-}
-
-// we are writing this function to categorize our files
-function organizeHelper(src, dest) {
-    let childNames = fs.readdirSync(src) // get all the files and folders inside your src
-    //console.log(childNames) 
-
-    for (let i = 0; i < childNames.length; i++) {
-        let childAddress = path.join(src, childNames[i])
-        let isFile = fs.lstatSync(childAddress).isFile()
-        //    console.log(childAddress + " " + isFile)
-        if (isFile == true) {
-            let fileCategory = getCategory(childNames[i])
-
-        }
+    
+    // we are writing this function to categorize our files
+    function organizeHelper(src , dest){
+       let childNames = fs.readdirSync(src) // get all the files and folders inside your src
+       //console.log(childNames) 
+       
+       for(let i=0 ; i<childNames.length ; i++){
+              let childAddress = path.join(src , childNames[i]) // path is identified for the files using path , name se check ni hota 
+              let isFile = fs.lstatSync(childAddress).isFile() // we check here to identify only the files and folder ni lena
+              //console.log(childAddress + "  " + isFile)   // yh btadega konsa true h mtlb file h and false mtlb kon ni h .
+    
+                                   // lstatSync = jo bhi path pass kia h folder ya file ka uske stats nikal leta h and uspe ek key hoti h jo btati h yeh file thi ya folder
+              if(isFile==true){
+                     let fileCategory = getCategory(childNames[i]);
+                     console.log(childNames[i]+ "  belongs to  " + fileCategory)
+    
+                     sendFiles(childAddress , dest , fileCategory)
+              }
+    
+    
+       }
     }
+    
+    
+    function getCategory(name){
+           let ext = path.extname(name)
+           ext = ext.slice(1)  // we will take out the extension names of the files 
+           //console.log(ext)
+      
+    
+           for(let type in types){
+                  let cTypeArr = types[type]
+                  //console.log(cTypeArr)
+    
+                  for(let i=0 ; i<cTypeArr.length ;i++){
+                         if(ext == cTypeArr[i])
+                         // we matched the extensions with the values presnet in ctypeArr
+    
+                         return type
+                  }
+           }
 
-}
-function getCategory(name) {
-    let ext = path.extname(name)
-    ext = ext.slice(1)
-    console.log(ext)
-}
+    
+       return 'others'
+    
+    
+    }
+    
+    
+    function sendFiles(srcFilePath , dest , fileCategory){
+           let catPath = path.join(dest, fileCategory)
+    
+    
+           if(fs.existsSync(catPath)==false){ // checking for category folder path 
+                  fs.mkdirSync(catPath)
+           }
+    
+    
+           let fileName = path.basename(srcFilePath) /// we took out the names of the files
+           let destFilePath = path.join(catPath , fileName) // here we created a path for the files in category folders
+    
+    
+           fs.copyFileSync(srcFilePath , destFilePath) // copied files from src to dest
+    
+           fs.unlinkSync(srcFilePath) // deleted the files from src
+    
+    
+           console.log(fileName + "is copied to" + fileCategory)
+    }

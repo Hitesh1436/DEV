@@ -12,12 +12,13 @@ const path = require('path')
 
 
 //  let content = fs.readFileSync('f1.txt')
+
 //  console.log("this is F1 data -> "+ content)
 
 
 // //Writing to a file
 // //writeFileSync
-// // if the file name that is passed doesnt not exists the a new file will be created with its
+// // if the file name that is passed doesnt not exists than a new file will be created with its
 // //name and the data will be written on that file
 // fs.writeFileSync('f1.txt', 'This data will be written on F2')
 
@@ -62,7 +63,7 @@ const path = require('path')
 // this returns true or false based on whether the passed directory exists or not
 
 // let doesExist = fs.existsSync('f1.txt')
-// //console.log(doesExist)
+//console.log(doesExist)
 
 // let statsOfDirectory = fs.lstatSync('myDirectory')
 // //console.log(statsOfDirectory)

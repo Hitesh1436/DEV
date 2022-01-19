@@ -13,12 +13,8 @@
 
 // cp.execSync("code");
 
-console.log("output->"+ cp.execSync('node test.js'))
+// console.log("output->"+ cp.execSync('node test.js'))
 
 
 
-
-
-
-
-//cp.execSync('start chrome https://www.pepcoding.com/studentSection')
+// cp.execSync('start chrome https://github.com/Hitesh1436/DEV')
