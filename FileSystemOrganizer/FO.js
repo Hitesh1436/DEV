@@ -1,3 +1,5 @@
+// == sirf values ke liye check krta h but === datatypes ke liye bhi check krta h 
+
 // We will be creating a File System Organizer//
 //Features of the Project -
 //If you have numerous Files in a folder and they are not Properly arranged
@@ -13,8 +15,8 @@ const path = require("path"); // path module import krwaya
 
 let inputArr = process.argv.slice(2);
 
-let types = {
-    media: ["mp4", "mkv", "mp3"],
+let types = {   //  yeh array bnya jo ext ke hisab se key btarha h konsi key ki ext h  and all
+    media: ["mp4", "mkv", "mp3","jpg","png","sng"],
     archives: ["zip", "7z", "rar", "tar", "gz", "ar", "iso", "xz"],
     documents: [
         "docx",
@@ -113,48 +115,46 @@ function organizeFn(dirpath) {      // folder tk phuch gye but ab edge cases dkh
                                    // lstatSync = jo bhi path pass kia h folder ya file ka uske stats nikal leta h and uspe ek key hoti h jo btati h yeh file thi ya folder
               if(isFile==true){
                      let fileCategory = getCategory(childNames[i]);
-                     console.log(childNames[i]+ "  belongs to  " + fileCategory)
+                     console.log(childNames[i]+ "  belongs to  " + fileCategory)  // kya hum particular extensions ko match krpye hain vo dkh rhe hain isse , jse hi run hoga toh getCategory function ko call lgega vo type return krega and vo fileCategory mn lakr dega and  usse console log krenege
     
-                     sendFiles(childAddress , dest , fileCategory)
+                     sendFiles(childAddress , dest , fileCategory)  // yeh fileCategory ko call lgyga 
               }
-    
-    
        }
     }
     
     
     function getCategory(name){
            let ext = path.extname(name)
-           ext = ext.slice(1)  // we will take out the extension names of the files 
-           //console.log(ext)
-      
+           //console.log(ext)  // ext name dedega hume jo hain files ki
+           ext = ext.slice(1)  // isse ext mn se dot htaya h humne 
+          //  console.log(ext)
     
-           for(let type in types){
-                  let cTypeArr = types[type]
+           for(let type in types){    // for every key type in object types loop lgaya humne
+                  let cTypeArr = types[type]   // yeh ek ek array jo key hn dedega
                   //console.log(cTypeArr)
     
-                  for(let i=0 ; i<cTypeArr.length ;i++){
+                  for(let i=0 ; i<cTypeArr.length ;i++){  // yeh loop lgya jo 4 array mili hain hume unpr loop lgaya
                          if(ext == cTypeArr[i])
-                         // we matched the extensions with the values presnet in ctypeArr
+                         // we matched the extensions with the values presnet in ctypeArr and uss type ko return krenge 
     
                          return type
                   }
            }
 
     
-       return 'others'
+       return 'others'    // koi type match ni hua toh others return krdega .
     
     
     }
     
     
-    function sendFiles(srcFilePath , dest , fileCategory){
-           let catPath = path.join(dest, fileCategory)
+    function sendFiles(srcFilePath , dest , fileCategory){  // hume source path chaiyee dest path khn bhjni h file uske liye and konsi category ka h vo bhi chaiye
+           let catPath = path.join(dest, fileCategory)   
     
     
            if(fs.existsSync(catPath)==false){ // checking for category folder path 
-                  fs.mkdirSync(catPath)
-           }
+                  fs.mkdirSync(catPath)   // yeh folders bnaega console krenge tb files ke hisab se jse hmre documents and media bnega sirf 
+           } 
     
     
            let fileName = path.basename(srcFilePath) /// we took out the names of the files
@@ -163,7 +163,7 @@ function organizeFn(dirpath) {      // folder tk phuch gye but ab edge cases dkh
     
            fs.copyFileSync(srcFilePath , destFilePath) // copied files from src to dest
     
-           fs.unlinkSync(srcFilePath) // deleted the files from src
+           fs.unlinkSync(srcFilePath) // deleted the files from src  mtlb copies ko htane ke liye bhr se 
     
     
            console.log(fileName + "is copied to" + fileCategory)
