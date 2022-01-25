@@ -1,12 +1,19 @@
-// Hoisting is the JavaScript interpreter’s action of moving all variable and function 
-// declarations to the top of the current scope.
+console.log(a) // undefined with var 
+// initialization error with let and const
 
-console.log(a);
+// Temporal Dead Zone - it is just a area where if you try to access variables defined with 
+// let and const before their initialization you wont be able to do it.
+
 
 greet()
+console.log(a)
+let a = 2
 
-var a=2
+console.log(a)
 
 function greet(){
-    console.log('Hello')
+      console.log('Hello') 
 }
+
+
+
