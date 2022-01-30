@@ -1,18 +1,18 @@
-const request = require('request')
-const cheerio = require('cheerio')
+const request = require('request');
+const cheerio = require('cheerio');
 
 
-console.log('Before')
+console.log('Before');
 
-request('https://www.worldometers.info/coronavirus/', cb)
+request('https://www.worldometers.info/coronavirus/', cb);
 
 
 function cb(error, response, html) {
     if (error) {
-        console.error(error)
+        console.error(error);
     }
     else {
-        handleHtml(html)  // hum chhte hn yeh function hume useful info dedega html code mn se
+        handleHtml(html) ; // hum chhte hn yeh function hume useful info dedega html code mn se
 
     }
 }
@@ -34,10 +34,10 @@ let totalcases = selTool(contentArr[0]).text()
 console.log('Total Cases:' + totalcases)
 
 let totaldeath = selTool(contentArr[1]).text()
-console.log('Total Death:' + totaldeath)
+console.log('Total Deaths:' + totaldeath)
 
 let totalrecoveries = selTool(contentArr[2]).text()
-console.log('Total Recovery:' + totalrecoveries)
+console.log('Total Recoveries:' + totalrecoveries)
 
 
 }
