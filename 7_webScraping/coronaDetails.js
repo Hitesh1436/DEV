@@ -34,7 +34,7 @@ let totalcases = selTool(contentArr[0]).text()
 console.log('Total Cases:' + totalcases)
 
 let totaldeath = selTool(contentArr[1]).text()
-console.log('Total Deaths:' + totaldeath)
+console.log('Total Death:' + totaldeath)
 
 let totalrecoveries = selTool(contentArr[2]).text()
 console.log('Total Recoveries:' + totalrecoveries)
