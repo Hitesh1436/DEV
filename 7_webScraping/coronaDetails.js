@@ -26,7 +26,7 @@ function handleHtml(html) {
     // console.log(contentArr)  // just to check ki jo humne class select ki h uska data jo contentArr mn aya h vo kya h
 
 //   for(let i=0;i<contentArr.length;i++){
-//       let data = selTool(contentArr[i]).text()   // yeh .text() uss data ko text fom mn dega hume
+//       let data = selTool(contentArr[i]).text()   // yeh .text() uss data ko text form mn dega hume
 //       console.log(data)
 //   }
 

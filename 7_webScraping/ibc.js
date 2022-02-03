@@ -20,31 +20,12 @@ function cb(error, response, html) {
 function handleHtml(html) {
     let selTool = cheerio.load(html)
 
-
     let elementArr = selTool('.match-comment-wrapper .match-comment-long-text')
     // console.log(elementArr)
 
     let lbc = selTool(elementArr[0]).text()
 
-
     console.log(lbc)
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 console.log('After')
