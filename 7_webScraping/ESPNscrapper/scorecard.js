@@ -41,8 +41,18 @@ function extractMatchDetails(html) {
   let htmlString = "";
 
   for (let i = 0; i < innings.length; i++) {
-      htmlString +=  $(innings[i]).html();
+    htmlString += $(innings[i]).html();
+
+    let teamName = $(innings[i]).find("h5").text();
+    teamName = teamName.split("INNINGS")[0].trim();
+
+    let opponentIndex = i == 0 ? 1 : 0;
+
+    let opponentName = $(innings[opponentIndex]).find("h5").text();
+    opponentName = opponentName.split("INNINGS")[0].trim();
+
+    // console.log(teamName , opponentName);
   }
 
-  console.log(htmlString);
+  //   console.log(htmlString);
 }
