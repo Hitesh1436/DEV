@@ -1,36 +1,48 @@
-let url = 'https://www.espncricinfo.com//series/ipl-2020-21-1210595/mumbai-indians-vs-chennai-super-kings-1st-match-1216492/full-scorecard';
+let url =
+  "https://www.espncricinfo.com//series/ipl-2020-21-1210595/mumbai-indians-vs-chennai-super-kings-1st-match-1216492/full-scorecard";
 
+const cheerio = require("cheerio");
+const request = require("request");
 
-const cheerio = require('cheerio');
-const request = require('request');
+request(url, function (error, response, html) {
+  if (error) {
+    console.error(error);
+  } else {
+    extractMatchDetails(html);
+  }
+});
 
+function extractMatchDetails(html) {
+  let $ = cheerio.load(html);
 
-request(url , function(error,response,html){
-    if(error){
-        console.error(error)
-    }
-    else{
-        extractMatchDetails(html)
-    }
-})
+  let descString = $(".header-info .description");
 
-function extractMatchDetails(html){
-    let $ = cheerio.load(html);
+  // console.log(descString)
 
-    let descString = $('.header-info .description');
+  let descStringArr = descString.text().split(",");
 
-    // console.log(descString)
+  let venue = descStringArr[1].trim();
+  let date = descStringArr[2].trim();
 
-    let descStringArr = descString.text().split(',');
+  let result = $(
+    ".match-info.match-info-MATCH.match-info-MATCH-half-width .status-text span"
+  ).text();
 
-    let venue = descStringArr[1].trim();
-    let date  = descStringArr[2].trim();
+  console.log(venue);
+  console.log(date);
+  console.log(result);
 
-    let result = $('.match-info.match-info-MATCH.match-info-MATCH-half-width .status-text span').text();
-       
+  console.log(
+    "----------------------------------------------------------------"
+  );
 
+  let innings = $(".card.content-block.match-scorecard-table>.Collapsible");
 
-    console.log(venue);
-    console.log(date);
-    console.log(result);
+  let htmlString = "";
+
+  for (let i = 0; i < innings.length; i++) {
+      htmlString +=  $(innings[i]).html();
+  }
+
+  console.log(htmlString);
 }
