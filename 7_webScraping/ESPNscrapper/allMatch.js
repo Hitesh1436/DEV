@@ -23,13 +23,9 @@ function extractAllLink(html) {
   for (let i = 0; i < scoreCardArr.length; i++) {
     let link = $(scoreCardArr[i]).attr("href");
     let fullLink = "https://www.espncricinfo.com/" + link;
-    //console.log(fullLink);
+    // console.log(fullLink);
 
-    scorecardObj.ps(fullLink)
-
-
-
-  
+    scorecardObj.ps(fullLink)  
   }
 }
 

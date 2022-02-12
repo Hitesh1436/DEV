@@ -1,16 +1,22 @@
-let url =
-  "https://www.espncricinfo.com//series/ipl-2020-21-1210595/mumbai-indians-vs-chennai-super-kings-1st-match-1216492/full-scorecard";
+// let url =
+//   "https://www.espncricinfo.com//series/ipl-2020-21-1210595/mumbai-indians-vs-chennai-super-kings-1st-match-1216492/full-scorecard";
 
 const cheerio = require("cheerio");
 const request = require("request");
+const path = require('path');
+const fs = require('fs');
 
-request(url, function (error, response, html) {
+function processScoreCrad(url) {
+  request(url, cb);
+}
+
+function cb(error, response, html) {
   if (error) {
     console.error(error);
   } else {
-    extractMatchDetails(html);  // fnc. bnya tki html mn se useful data store krwalee
+    extractMatchDetails(html);
   }
-});
+}
 
 function extractMatchDetails(html) {
   let $ = cheerio.load(html);    // $ isme load krwadia html ko ab
@@ -52,7 +58,7 @@ function extractMatchDetails(html) {
     opponentName = opponentName.split("INNINGS")[0].trim();
 
     // console.log(teamName, opponentName);
-    
+
     let cInning = $(innings[i]);
 
     let allRows = cInning.find(".table.batsman tbody tr");
@@ -71,9 +77,9 @@ function extractMatchDetails(html) {
         let STR = $(allCols[7]).text().trim();
 
         console.log(
-          `${playerName} | ${runs} |${balls} | ${fours} | ${sixes} | ${STR}`
-        );
-        // Template Literal
+          `${playerName} | ${runs} |${balls} | ${fours} | ${sixes} | ${STR}`);  // Template Literal
+
+        processPlayer(teamName, opponentName, playerName, runs, balls, fours, sixes, STR, venue, date, result)
       }
     }
 
@@ -83,7 +89,18 @@ function extractMatchDetails(html) {
 
   //   console.log(htmlString);
 }
+  function processPlayer(teamName, opponentName, playerName, runs, balls, fours, sixes, STR, venue, date, result){
+    let teamPath = path.join(__dirname,'IPL',teamName)
+    dirCreator(teamPath)
+  }
 
-module.exports ={
-  ps : processScoreCrad
+  function dirCreator(filePath){
+    if(fs.existsSync(filePath)==false){
+        fs.mkdirSync(filePath)
+    }
+}
+
+
+module.exports = {
+  ps: processScoreCrad
 }
