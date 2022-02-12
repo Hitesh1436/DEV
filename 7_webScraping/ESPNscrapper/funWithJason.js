@@ -41,15 +41,4 @@ fs.writeFileSync("example.json", stringData);
 console.log("JSON file Updated");
 
 
-// json file ko excel mn kia hai
-let newWB = xlsx.utils.book_new(); // creating a new workbook
-let newWS = xlsx.utils.json_to_sheet(jsonFile);  // json is converted to sheet format (rows and columns)
-xlsx.utils.book_append_sheet(newWB, newWS, 'Avengers');
-xlsx.writeFile(newWB, 'abc.xlsx');
-
-// excel ko json mn
-let wb = xlsx.readFile('abc.xlsx');
-let excelData = wb.Sheets['Avengers'];
-let ans = xlsx.utils.sheet_to_json(excelData);
-console.log(ans)
 

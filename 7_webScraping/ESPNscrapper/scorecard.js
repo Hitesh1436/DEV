@@ -5,6 +5,7 @@ const cheerio = require("cheerio");
 const request = require("request");
 const path = require('path');
 const fs = require('fs');
+const xlsx = require('xlsx');
 
 function processScoreCrad(url) {
   request(url, cb);
@@ -91,14 +92,46 @@ function extractMatchDetails(html) {
 }
   function processPlayer(teamName, opponentName, playerName, runs, balls, fours, sixes, STR, venue, date, result){
     let teamPath = path.join(__dirname,'IPL',teamName)
-    dirCreator(teamPath)
+    dirCreator(teamPath);
+
+   let filePath = path.join(teamPath,playerName+ '.xlsx')
+
+   let content = excelReader(filePath,playerName)
+
+   let playerObj = {teamName, opponentName, playerName, runs, balls, fours, sixes, STR, venue, date, result
+
+   };
+   content.push(playerObj)
+
+   excelWriter(filePath,playerName,content)
+
   }
 
-  function dirCreator(filePath){
-    if(fs.existsSync(filePath)==false){
-        fs.mkdirSync(filePath)
+  function dirCreator(folderPath){
+    if(fs.existsSync(folderPath)==false){
+        fs.mkdirSync(folderPath);
     }
 }
+
+function excelWriter(fileName,sheetName,jsonData){   // excel write krega 
+  let newWB = xlsx.utils.book_new(); // creating a new workbook
+let newWS = xlsx.utils.json_to_sheet(jsonData);  // json is converted to sheet format (rows and columns)
+xlsx.utils.book_append_sheet(newWB, newWS, sheetName);
+xlsx.writeFile(newWB, fileName);
+}
+
+
+function excelReader(fileName,sheetName){   // excel ko json mn
+
+  if(fs.existsSync(fileName)==false){
+    return []
+  }
+let wb = xlsx.readFile(fileName);
+let excelData = wb.Sheets[sheetName];
+let ans = xlsx.utils.sheet_to_json(excelData);
+return ans
+}
+
 
 
 module.exports = {
