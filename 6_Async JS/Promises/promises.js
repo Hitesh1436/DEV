@@ -11,8 +11,7 @@ console.log("Before");
 
 let promise = fs.promises.readFile("f1.txt");  // yeh promises upr likha jo function hai uska sara kaam krdega
 
-
-//console.log(promise)
+// console.log(promise)
 
 
 // Fulfilled
@@ -24,7 +23,5 @@ promise.then(function (data) {
 promise.catch(function(err){
        console.log(err)
 })
-
-
 
 console.log("After");
