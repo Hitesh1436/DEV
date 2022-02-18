@@ -1,27 +1,61 @@
-let fs = require("fs");
+// const fs = require('fs');
 
-console.log("before");
+// console.log("Before")
 
-let f1p = fs.promises.readFile("f1.txt");
+// let f1p = fs.promises.readFile('f1.txt')
 
-f1p.then(cb);
+// f1p.then(cb)
+
+
+// function cb(data) {
+//   console.log('File Data ->' + data)
+//   let f2p = fs.promises.readFile('f2.txt')
+
+//   f2p.then(cb2)
+// }
+
+// function cb2(data) {
+//   console.log('File Data ->' + data)
+//   let f3p = fs.promises.readFile('f3.txt')
+
+//   f3p.then(cb3)
+// }
+
+// function cb3(data) {
+//   console.log('File Data ->' + data)
+// }
+// console.log("After")
+
+
+
+// Improvement kia h tki then ko baar baar na call kre nd chaining ka use krrhe hn thoda short likhne ke liye
+
+const fs = require('fs');
+
+console.log("Before")
+
+let f1p = fs.promises.readFile('f1.txt')
 
 function cb(data) {
-  console.log("File data -> " + data);
-  let f2p = fs.promises.readFile("f2.txt");
+  console.log('File Data ->' + data)
+  let f2p = fs.promises.readFile('f2.txt')
 
-  f2p.then(cb2);
+  return f2p;
 }
 
 function cb2(data) {
-  console.log("File data -> " + data);
-  let f3p = fs.promises.readFile("f3.txt");
+  console.log('File Data ->' + data)
+  let f3p = fs.promises.readFile('f3.txt')
 
-  f3p.then(cb3);
+  return f3p;
 }
 
 function cb3(data) {
-  console.log("File data -> " + data);
+  console.log('File Data ->' + data)
 }
 
-console.log("after");
+f1p.then(cb).then(cb2).then(cb3).catch(function(err){
+  console.log(err)
+})
+
+console.log("After");
