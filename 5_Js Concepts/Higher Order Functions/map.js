@@ -5,17 +5,17 @@
 //    or returns the function as output.
 
 
-let arr = [2,3,4,5,6,7,8,9,10];
+// let arr = [2,3,4,5,6,7,8,9,10];
 
-//Map Function
+// //Map Function
 
-let sqarr = arr.map(function squarer(v){
-    return v*v;
-})
+// let sqarr = arr.map(function squarer(v){
+//     return v*v;
+// })
 
-// console.log(sqarr);
+// // console.log(sqarr);
 
-// console.log(arr);
+// // console.log(arr);
 
 
 // let nameArr = ['Hitesh','Mrinal','Tania'];
@@ -50,6 +50,6 @@ let transactioninRs = transactions.map(function(n){
     return n*inrtToUsd;
 })
 
-console.log(transactions)
+// console.log(transactions)
 
 console.log(transactioninRs)
