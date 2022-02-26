@@ -1,13 +1,13 @@
 //String is a sequence of characters
 
-// let str = 'pepcoders'
+let str = 'pepcoders'
 
 // console.log(str)
 
 //Methods -
 
 //Length of string
-//console.log('The length of string is' ,str.length)
+// console.log('The length of string is' ,str.length)
 
 //extracting a part of a string
 
@@ -53,9 +53,9 @@
 // concatenation (Concat Method)
 
 // let firstString = 'Hello'
-// let secondString = 'Ayush'
+// let secondString = 'Hitesh'
 
-// // Hello Ayush
+// // Hello Hitesh
 
 // let cocatenation = firstString.concat(" bhai " , secondString)
 // console.log(cocatenation)
@@ -63,11 +63,11 @@
 
 //Trim method is used to remove all the whiteSpaces
 
-let text = '            Hello World          '
-console.log(text)
+// let text = '            Hello World          '
+// console.log(text)
 
-let trimmedtext = text.trim()
-console.log(trimmedtext)
+// let trimmedtext = text.trim()
+// console.log(trimmedtext)
 
 
 
