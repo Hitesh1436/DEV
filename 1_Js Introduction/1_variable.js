@@ -3,22 +3,22 @@
 // // var , let , const
 
 
-// var a; // variable will be initialized with undefined
+var a; // variable will be initialized with undefined
 // console.log(a)
 
-// //JS is a dynamically typed langauge dataType is npot specified here
+//JS is a dynamically typed langauge dataType is not specified here
 
-// a = 3
+a = 3
 // console.log(a)
 
-// a= "I am String"
+a= "I am String"
 // console.log(a)
 
-// a= true
+a= true
 // console.log(a)
 
 
-// a = null
+a = null
 // console.log(a)
 
 
@@ -33,7 +33,7 @@
 
 // // Var has some Problems 
 
-// // 1st Problem with var - Redeclartion
+// // 1st Problem with var - Redeclaration
 // var b = 'hello'
 
 // console.log(b) // hello
@@ -42,7 +42,7 @@
 // console.log(b)// bye
 
 
-// // overcoming Redeclation
+// // overcoming Redeclaration
 
 // // use let keyword
 
@@ -64,7 +64,7 @@
 
 
 
-// // loops -
+ // loops -
 
 // //for loop
 // //Prime Number 
