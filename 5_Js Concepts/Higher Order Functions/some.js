@@ -1,4 +1,4 @@
-// Some: Conditon Check: To get true or false based on a condition 
+// Some: Condition Check: To get true or false based on a condition 
 //it will return true if 1 or more that 1 element satisfies the condition -
 
 
