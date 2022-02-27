@@ -49,7 +49,7 @@ a = null
 // let b = 'hello'
 
 // console.log(b) // hello
-// let b = 'bye' // redcalrtion is not allowed with let keyword
+// // let b = 'bye' // redcalrtion is not allowed with let keyword
 
 // console.log(b)// Error
 
