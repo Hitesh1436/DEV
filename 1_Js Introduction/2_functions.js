@@ -29,7 +29,7 @@
 // function as first class Citizens
 
 // let sayHi = function(a , b){ // anonymous functions
-//        console.log(a+b) // in js you can assign a function to a vaeriable and can call it
+//        console.log(a+b) // in js you can assign a function to a variable and can call it
 // } // function Expression
 
 
