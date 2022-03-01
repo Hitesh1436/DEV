@@ -1,9 +1,8 @@
 const loginLink = "https://www.hackerrank.com/auth/login";
-
 let email = "fesagom584@chatich.com";
 let password = "pepcoding123";
-
 let puppeteer = require("puppeteer");
+const codeFile = require('./code')
 
 console.log("Before");
 
@@ -16,7 +15,7 @@ let browserWillbeLauncedPromise = puppeteer.launch({
   defaultViewport: null,
   args: ["--start-maximized"],
 });
-// we used puppeteer launch method to return an instance of broswer  
+// we used puppeteer launch method to return an instance of broswer
 
 browserWillbeLauncedPromise
   .then(function (browserInstance) {
@@ -46,30 +45,59 @@ browserWillbeLauncedPromise
       delay: 100,
     });
     return loginPromise;
-  }).then(function(){
-    let algoWillBeClickedPromise = waitAndClick('.topic-card a[data-attr1="algorithms"]',page)
-    return algoWillBeClickedPromise;
-  }).then(function(){
-    console.log('Algo Section Clicked');
-  }).then(function(){
-    let getToWarmupPromise = waitAndClick('input[value="warmup"]',page)
+  })
+  .then(function () {
+    let algoWillBeclickedPromise = waitAndClick(
+      '.topic-card a[data-attr1="algorithms"]',
+      page
+    );
+    return algoWillBeclickedPromise;
+  })
+  .then(function () {
+    let getToWarmupPromise = waitAndClick('input[value="warmup"]', page);
     return getToWarmupPromise;
-  }).then(function(){
-    console.log('Warmup Section Clicked');
+  })
+  .then(function () {
+    let ChallengesArrPromise = page.$$(
+      ".ui-btn.ui-btn-normal.primary-cta.ui-btn-line-primary.ui-btn-styled",
+      { delay: 100 }
+    );
+
+    return ChallengesArrPromise;
+  })
+  .then(function (questionsArr) {
+    console.log("No of Questions" + questionsArr.length);
+
+    let questionWillBeSolvedPromise = questionSolver(page, questionsArr[0], codeFile.answers[0])
+
+
   });
 
-  function waitAndClick(selector , cPage){
-    return new Promise(function(resolve  , reject){
-      let waitForModalPromise = cPage.waitForSelector(selector);
-      waitForModalPromise.then(function(){
-        let clickModalPromise = cPage.click(selector , {delay : 100})
-        return clickModalPromise
-      }).then(function(){
-        resolve()
-      }).catch(function(){
-        reject()
+function waitAndClick(selector, cPage) {
+  return new Promise(function (resolve, reject) {
+    let waitForModalPromise = cPage.waitForSelector(selector);
+    waitForModalPromise
+      .then(function () {
+        let clickModalPromise = cPage.click(selector, { delay: 100 });
+        return clickModalPromise;
       })
-    })
+      .then(function () {
+        resolve();
+      })
+      .catch(function () {
+        reject();
+      });
+  });
 }
 
-// console.log("After");
+
+
+function questionSolver(page, question, answer) {
+  return new Promise(function (resolve, reject) {
+    let questionWillBeClickedPromise = question.click()
+    questionWillBeClickedPromise.then(function () {
+      console.log('question Clicked')
+    })
+
+  })
+}
