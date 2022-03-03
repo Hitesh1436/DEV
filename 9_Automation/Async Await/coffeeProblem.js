@@ -14,13 +14,29 @@ function processOrder(order){
         resolve(`${order} Served`)
     })
 }
+// // Promisified Solution 
+// placeOrder('coffee').then(function(demand){
+//     console.log(demand)
+//     let orderIsProcessed = processOrder(demand)
+//     return orderIsProcessed
+// }).then(function(orderServed){
+//     console.log(orderServed)
+// }).catch(function(err){
+//     console.log(err)
+// })
 
-placeOrder('coffee').then(function(demand){
-    console.log(demand)
-    let orderIsProcessed = processOrder(demand)
-    return orderIsProcessed
-}).then(function(orderServed){
-    console.log(orderServed)
-}).catch(function(err){
-    console.log(err)
-})
+
+// Async Await Solution -- na jyda then use krna na itne function short krdeta h kfi code ko
+
+async function serveOrder(){
+    try{
+        let orderPlaced = await placeOrder('coffee');
+        console.log(orderPlaced);
+        let processedOrder = await processOrder(orderPlaced);
+        console.log(processedOrder);
+    } catch(error){
+        console.log(error);
+    }
+}
+
+serveOrder();
