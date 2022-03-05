@@ -1,3 +1,4 @@
+
 function placeOrder(drink){
     return new Promise(function(resolve , reject){
         if(drink === 'coffee'){
@@ -11,9 +12,11 @@ function placeOrder(drink){
 function processOrder(order){
     return new Promise(function(resolve){
         console.log('Oders is Being Processed')
-        resolve(`${order} Served`)
+        // resolve(`${order} Served`)  // template literal use kia h bas yhn 
+        resolve(order + 'Served')
     })
 }
+
 // // Promisified Solution 
 // placeOrder('coffee').then(function(demand){
 //     console.log(demand)
