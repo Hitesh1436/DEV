@@ -32,7 +32,7 @@ function processOrder(order){
 // Async Await Solution -- na jyda then use krna na itne function short krdeta h kfi code ko
 
 async function serveOrder(){
-    try{
+    try{   // jb ese code ho jispr sure ni hain hum ki chlega ya ni toh usse hum TRY-CATCH ke andr rkhte hn
         let orderPlaced = await placeOrder('coffee');
         console.log(orderPlaced);
         let processedOrder = await processOrder(orderPlaced);
