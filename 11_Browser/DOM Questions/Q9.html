@@ -30,8 +30,25 @@
       <div class="yellow"></div>
     </div>
     <script>
-      //Q The following code is broken. Even when clicked on yellow, its alerted that red is clicked. Fix it
-      
+      //Q-> The following code is broken. Even when clicked on yellow,
+      // its alerted that red is clicked.
+
+      let red = document.querySelector(".red");
+      // red.addEventListener("click", function (e) {
+      //   alert("red was clciked");
+      // });
+
+      // Fix the Code:-
+
+      // Solution ->
+      red.addEventListener("click", function (e) {
+        if(e.target == e.currentTarget){
+          alert("red was clicked")
+        }else{
+          alert("yellow was clicked")
+        }
+      });
+
     </script>
   </body>
 </html>
