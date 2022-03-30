@@ -78,6 +78,8 @@ function createTicket(ticketKaColorClass, task) {
     handleRemoval(ticketCont)
 
     handleLock(ticketCont)
+
+    handleColor(ticketCont)
 }
 {/* <div class="ticket-cont"></div> */ }
 
@@ -119,5 +121,30 @@ function handleLock(ticket) {
             ticketLock.classList.add(lockClass)
             ticketTaskArea.setAttribute('contenteditable', 'false')
         }
+    })
+}
+
+
+// color change krna 
+
+function handleColor(ticket){
+
+    let ticketColorBand = ticket.querySelector('.ticket-color')
+
+    ticketColorBand.addEventListener('click',function(e){
+        let currentTicketColor = ticketColorBand.classList[1]
+
+        let currentTicketColoridx = colors.findIndex(function(color){
+            return currentTicketColor === color
+        })
+
+        currentTicketColoridx++
+
+        let newTicketColorIdx = currentTicketColoridx%colors.length
+        
+        let newTicketColor = colors[newTicketColorIdx]
+
+        ticketColorBand.classList.remove(currentTicketColor)
+        ticketColorBand.classList.add(newTicketColor)
     })
 }

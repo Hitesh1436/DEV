@@ -140,6 +140,8 @@ body {
   height: calc(100% -1rem - 2rem);
   font-size: 1.5rem;
   padding: 5px;
+  outline: none;
+  overflow-wrap: break-word;
 }
 
 .ticket-lock{
