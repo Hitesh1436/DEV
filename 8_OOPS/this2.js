@@ -1,15 +1,15 @@
 // Node  + strict
 
-'use strict'
+'use strict'   // isse hmra strict mode hota h ab
 
 
 //global -
 
-// console.log(this) 
+// console.log(this)   // empty object milega
 
 
-// function f(){
-//        console.log(this)
+// function f(){  
+//        console.log(this)   // undefined dega 
 // }
 
 // f()
@@ -19,7 +19,7 @@
 //        name : 'Rahul',
 
 //        f: function(){
-//               console.log(this)
+//               console.log(this)  // object milega 
 //        }
 // }
 
@@ -32,7 +32,7 @@ let obj2 = {
 
        f: function f(){
               function g(){
-                     console.log(this)
+                     console.log(this)  // undefined dega 
               }
 
               g();

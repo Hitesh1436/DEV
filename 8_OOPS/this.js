@@ -41,7 +41,7 @@ let obj2 ={
 obj2.f()
 
 
-//Sumarry -
+//Summary -
 
 //Context : node + non strict ->
 

@@ -1,10 +1,10 @@
 'use strict'
 
-//console.log(this) // window Object
+//console.log(this)             // window Object milega
 
 
 // function f(){
-//        console.log(this)
+//        console.log(this)      // 
 // }
 
 // f()
