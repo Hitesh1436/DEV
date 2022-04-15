@@ -3,7 +3,7 @@ class Person {
         this.name = name,
             this.age = age
     }
-    welcome(){
+    welcome() {
         console.log(' Hello ' + this.name)
     }
 }
@@ -11,7 +11,7 @@ class Person {
 // super body lata h ya keys and not values
 class Teacher extends Person {
     constructor(name, age, classStrength) {
-        super(name, age)           
+        super(name, age)         // tki baar baar na likhna pde this.name and age so super use krenge 
         this.classStrength = classStrength;
     }
 }
@@ -21,7 +21,7 @@ class Student extends Person {
         super(name, age)
         this.cgpa = cgpa
     }
-    hello(){
+    hello() {
         super.welcome()
     }
 }

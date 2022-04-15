@@ -34,7 +34,7 @@
 let test = () => {
     console.log(this)  // {}- empty object bcz this ke pass kuch ni h toh hume {} mila
 }
-test()
+// test()
 
 let person = {
     name: 'Adam',

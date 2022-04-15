@@ -21,7 +21,7 @@ let [a, b, c, d, e = 'and now', f = 'bye'] = arr
 //     pincode : 12345
 // }
 
-// for object hmesha keys ka name pass krna h
+// // for object hmesha keys ka name pass krna h
 
 // let{name,state,pincode} = obj    // yhn name se phle state dene se bhi frk ni pdega bas console mn jruri h sequence
 
