@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script type="text/babel">
+    // let ele = document.createElement('h1')
+    // ele.innerText='Hello'
+
+    // let root = document.getElementById('root')
+    // root.appendChild(ele)
+
+    // let ele = React.createElement('h1',{
+    //     children : ['Hello']
+    // })
+    // console.log(ele)
+
+    // let root = document.getElementById('root')
+
+    //     ReactDOM.render(ele,root)
+
+    // JSX
+
+    function Child({name , age , marks}) {  // yhn hum properties set krrhe hn nd hmesha {} isma likhte hn 
+      return (
+          <>
+          <h1>Hello {name}</h1>
+          <h2>{age}</h2>
+          <h3>{marks}</h3>
+          </>
+      )
+    }
+
+    function Child2({place}) {
+      return <h1>GoodBye {place}</h1>;
+    }
+
+    function Parent() {
+      // yh mn dono child and child2 ni deskta error dega nd uske liye hume ya toh react fragment use krenge ni toh ek parent bna hoga ni toh ek div ke ande daldo dono ko
+      return (
+        <>           
+          <Child name = "Hitesh"age="25" marks = "86" />
+          <Child2  place ="Delhi"/>
+        </>
+      );
+    }
+
+    ReactDOM.render(<Parent />, document.getElementById("root"));
+    // render mn 1st->jisme render krwana h nd 2nd-> kisse render krwana h
+  </script>
+</html>
