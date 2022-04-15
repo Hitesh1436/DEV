@@ -4,7 +4,7 @@ class Person {
             this.age = age
     }
     welcome(){
-        console.log('Hello' + this.name)
+        console.log(' Hello ' + this.name)
     }
 }
 // extends like person ka extension in other
@@ -34,4 +34,5 @@ let student1 = new Student('Joy', 15, 8.0)
 // console.log(teacher1)
 // console.group(student1)
 
-console.log(welcome)
+person1.welcome()
+student1.hello()
